@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CodeBuddy</title>
+
+
+  <!-- jquery -->
+  <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+  <script type="text/javascript" src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js"
+    integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+
+  <!-- Code Mirror -->
+  <script src="/js/codemirror.js"></script>
+  <link rel="stylesheet" href="/css/codemirror.css">
+
+  <script src="/js/javascript.js"></script>
+  <script src="/js/python.js"></script>
+
+  <link rel="stylesheet" href="/css/darcula.css">
+
+  <link rel="stylesheet" href="/css/show-hint.css">
+  <script src="/js/javascript-hint.js"></script>
+  <script src="/js/show-hint.js"></script>
+
+  <!-- 폰트어썸 및 폰트 -->
+  <script src="https://kit.fontawesome.com/3c792eb2a9.js" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,500&display=swap"
+    rel="stylesheet" />
+
+  <!-- css -->
+  <link rel="stylesheet" href="/CodeArena/css/chatlist.css" />
+  <link rel="stylesheet" href="/CodeArena/css/pop_chat.css" />
+  <link rel="stylesheet" href="/CodeArena/css/code_arena.css">
+</head>
+
+<body>
+
+  <header id="head">
+    <div class="m_header">
+      <p class="m_logo" id="m_btn">CODE BUDDY</p>
+      <button class="m_btn_c" id="chat_btn">Code Chat</button>
+      <button class="m_btn_a" id="arena_btn">Code Arena</button>
+      <button class="m_btn" id="login_btn">Login</button>
+      <button id="userInfo_btn" class="m_btn" style="display: none;">{{name}} / <a onclick="location.href='/page/logout'"
+        class="logout">Logout</a></button>
+  </div>
+    </div>
+  </header>
+
+  <section id="notice" class="notice">
+    <div class="page-title">
+      <div class="container">
+        <h3>Code Arena 방 목록</h3>
+      </div>
+    </div>
+
+    <!-- board seach area -->
+    <div id="board-search">
+      <div class="container">
+        <div class="search-window">
+          <form action="">
+            <div class="search-wrap">
+              <span class="lang">
+                개발 언어
+                <button class="filter-button" data-filter="all">전체</button>
+                <button class="filter-button" data-filter="javascript">JavaScript</button>
+                <button class="filter-button" data-filter="python">Python</button>
+
+              </span>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- board list area -->
+    <div id="board-list">
+      <div class="container">
+        <table class="board-table">
+          <thead>
+            <tr class="borad-table-tr">
+              <th scope="col" class="th-num">번호</th>
+              <!-- <th scope="col" class="th-c_method">채팅방식</th> -->
+              <th scope="col" class="th-lang">개발언어</th>
+              <th scope="col" class="th-title">제목(인원수)</th>
+              <th scope="col" class="th-user">작성자</th>
+              <!-- <th scope="col" class="th-date">인원</th> -->
+            </tr>
+          </thead>
+          <tbody class="list">
+
+          </tbody>
+        </table>
+        <div class="pagination">
+          <span class="pagination__number-indicator"></span>
+          <button class="pagination__arrow">
+            <span class="pagination__arrow-half"></span>
+            <span class="pagination__arrow-half"></span>
+          </button>
+          <button class="pagination__number pagination__number--active">
+            1
+          </button>
+          <button class="pagination__number">2</button>
+          <button class="pagination__number">3</button>
+          <button class="pagination__number">4</button>
+          <button class="pagination__number">5</button>
+          <button class="pagination__number">6</button>
+          <button class="pagination__number">7</button>
+          <button class="pagination__arrow pagination__arrow--right">
+            <span class="pagination__arrow-half"></span>
+            <span class="pagination__arrow-half"></span>
+          </button>
+          <button class="write" onclick="openModal()">방생성</button>
+        </div>
+      </div>
+    </div>
+    <div id="modal" class="modal">
+      <div class="modal-content">
+        <div class="modal-content1">
+          <span class="close" onclick="closeModal()">&times;</span>
+        </div>
+        <div class="modal-content2">
+          <h2 class="make-h2">방 생성</h2>
+        </div>
+        <div class="modal-content3">
+          <form id="make_room_form" class="make_room_form">
+            <div class="m_div1">
+              <label for="room-name">방 이름</label>
+              <input type="text" id="room_name" name="room_name" required />
+            </div>
+            <div class="m_div2">
+              <label for="dev-lang">개발언어</label>
+              <select name="dev_lang" id="dev_lang">
+                <option value="javascript">JavaScript</option>
+                <option value="python">Python</option>
+              </select>
+            </div>
+            <button type="submit" class="make-btn">만들기</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- code arena 부분 -->
+  <div id="code_arena_zip" class="code_arena_zip">
+    <div class="code_arena">
+      <!-- 나가기 -->
+      <div class="c_a_above2">
+        <div id="arrow"  class="arrow">
+          <button id="leave_room"><i class="fa-solid fa-arrow-left fa-2x" style="color: #ffffff;"></i></button>
+        </div>
+      </div>
+      <div class="c_a_center">
+        <!-- 문제 Start 버튼 -->
+        <div id="c_a_center_button" class="c_a_center_button">
+          <button id ="startBtn" class="c_a_center_button2" style="display:none;">문제 START!</button>
+          <button id="readyBtn" class="c_a_center_button2" style="display:none;">READY</button>
+        </div>
+        <!-- 문제 제시  -->
+        <div id="c_a_left" class="c_a_left" style="display: none;">
+          <div class="c_a_l_title">1. 잭팟 5배~!</div>
+          <div class="c_a_l_que">
+            <pre>
+              정수 n이 주어질 때, n의 5배가 반환되는 함수를 작성하시오.
+              함수명은 변경해서는 안되며 return으로 값을 반환하시오.
+              모든 구문의 끝에는 세미콜론(;)으로 마무리를 하시오.
+            </pre>
+          </div>
+          <div class="c_a_l_ans">입출력 예
+            <table id="resultTable" border="1px solid black">
+              <tr>
+                <th class="table-cell">n</th>
+                <th class="table-cell">result</th>
+              </tr>
+              <tr>
+                <td class="table-cell">2</td>
+                <td class="table-cell">10</td>
+              </tr>
+              <tr>
+                <td class="table-cell">5</td>
+                <td class="table-cell">25</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+        <!-- 문제 코드 작성 -->
+        <div id="c_a_right" class="c_a_right" style="display: none;">
+          <form class="c_a_right_form" action="http://localhost:3000/" id="inputForm">
+            <div class="c_a_right_1">
+              <div class="c_a_right_1_1">
+                <div class="c_a_r_Codelang1">
+                  <div class="c_a_r_Codelang_n1"><i class="fa-brands fa-js" style="color: #eac406;"></i>&emsp;JavaScript
+                  </div>
+                </div>
+                <div class="c_a_r_Codewrite1">
+                  <div class="c_a_r_Codewrite1_ed1">
+                    <textarea name="js" id="js" cols="133" rows="30"></textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="c_a_right_1_2" style="display: none;">
+                <div class="c_a_r_Codelang2">
+                  <div class="c_a_r_Codelang_n2"><i class="fa-brands fa-python" style="color: #ffffff;"></i>&emsp;Python
+                  </div>
+                </div>
+                <div class="c_a_r_Codewrite2">
+                  <div class="c_a_r_Codewrite2_edi2">
+                    <textarea name="python" id="python" cols="90" rows="26"></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 출력결과 -->
+            <div class="c_a_right_2">
+              <!-- 전송버튼 -->
+              <div class="output_txt">
+                <div class="txt_main">실행결과</div>
+                <div class="text-center sendBtn">
+                  <div class="sil_btns1">
+                    <button id="codeStart" class="btn btn-dark">코드 실행</button>
+                  </div>
+                  <div class="sil_btns2">
+                    <button id="codeSubmit" class="btn c_a_result">코드 제출</button>
+                  </div>
+                </div>
+              </div>
+              <div id="outputDiv" class="outputDiv">
+                <!-- Output -->
+                <iframe id="live"></iframe>
+              </div>
+
+            </div>
+        </div>
+        </form>
+      </div>
+
+      <!-- 참가자 현상황 -->
+      <div class="c_a_under">
+        <div class="c_a_under2">
+          <div class="c_a_u_r_name">
+            <div class="c_a_u_r_name2">누구방</div>
+          </div>
+          <div class="c_a_time">
+            <div id="c_a_above1" class="c_a_above1">
+              <i class="fa-solid fa-stopwatch" style="color: #ffffff;"></i>&nbsp;
+              <input type="text" id="timer" class="timer" readonly>
+            </div>
+          </div>
+          <div class="c_a_p_user">
+            <!-- <div class="c_a_p_u1">
+              <div class="u_info">
+                <div class="u_i_img" id="host_user">방장</div>
+                <div class="u_i_nick" id="host_nickname">vudghk675</div>
+              </div>
+              <div class="u_remain">
+                <div class="u_r_ques">
+                  <div class="u_r_circle">ok</div>
+                </div>
+              </div>
+            </div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- code arena 부분 끝 -->
+
+  <!-- 채팅방 시작 -->
+  <!-- chat 버튼 -->
+  <div id="chat_open" class="chat_open">
+    <button class="chat_open_btn">
+      <i class="fa-solid fa-comment fa-2x" style="color: #24283B"></i>
+    </button>
+  </div>
+
+  <!-- chat 메인 -->
+  <div id="chat" class="chat">
+    <div class="chat_1">
+      <div class="chat_main">
+        <!-- 채팅방 이름 -->
+        <div class="c_roomname">
+          <div class="c_roomname_1">
+            <div class="c_content_name">
+              <div class="c_c_name"></div>
+              <div class="c_content_num">(인원)</div>
+            </div>
+            <div id="c_content_mini" class="c_content_mini">
+              <button class="c_content_mini_btn">
+                <i class="fa-solid fa-caret-down fa-lg" style="color: #ffffff"></i>
+              </button>
+            </div>
+            <div class="c_content_close">
+              <button class="c_content_close_btn">
+                <i class="fa-solid fa-xmark fa-lg" style="color: #ffffff"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 채팅내용 -->
+        <div class="c_main_content">
+          <div class="chat1">
+            <ul>
+              <!-- 동적 생성 -->
+            </ul>
+          </div>
+        </div>
+
+        <div class="chat1 format">
+          <ul>
+            <li>
+              <div class="sender">
+                <span></span>
+              </div>
+              <div class="message">
+                <span></span>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- 채팅작성 및 전송 -->
+        <div class="c_chatting">
+          <form name="c_chatting_form" class="c_chatting_form">
+            <div class="c_chatting_1">
+              <textarea onkeypress="enterChat(event)" id="form_input" class="form_input" placeholder="채팅을 입력하세요"></textarea>
+            </div>
+            <div class="c_chatting_2">
+              <div class="c_chatting_22">
+                <button class="c_chatting_2_btn" type="submit">
+                  <i class="fa-solid fa-envelope-circle-check fa-2x"></i>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="chat_mini" id="chat_mini">
+    <div class="chat_mini_1">
+      <div class="chat_mini_1_1">
+        <div class="chat_mini_1_11">
+          <p id="mini_room_name"></p>
+        </div>
+        <div class="chat_mini_1_21">
+          <p id="$mini_room_users">4/6</p>
+        </div>
+      </div>
+      <div class="chat_mini_1_2">
+        <button class="chat_mini_1_2btn">
+          <i class="fa-solid fa-caret-up fa-lg" style="color: #ffffff"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- 게임종료 모달 -->
+  <div id="myModal5" class="modal5">
+    <div class="modal-content5">
+      <p>게임이 종료되었습니다.</p><br>
+      <button id="toMain">메인으로</button>
+    </div>
+  </div>
+
+
+  <!-- js 파일 경로 -->
+  <script>
+    // 로그인 했을 시 사용자 이름 표시
+    let login = '{{login}}'
+    let logout = '{{logout}}'
+
+    if (login) {
+      document.querySelector('#login_btn').style.display = 'none'
+      document.querySelector('#userInfo_btn').style.display = 'inline'
+    }
+    if (logout) {
+      document.querySelector('#login_btn').style.display = 'inline'
+      document.querySelector('#userInfo_btn').style.display = 'none'
+    }
+
+    // 메인 이외의 다른 페이지에서 Code Chat 클릭시 메인이동 후 Code Chat 클릭
+    let moveCode = '{{code}}'
+    if (moveCode) {
+      document.getElementById('main_c').click()
+    }
+
+    let moveArena = '{{arena}}'
+    if (moveArena) {
+      document.getElementById('main_a').click()
+    }
+
+  </script>
+
+
+  <script src="/socket.io/socket.io.js"></script>
+  <!-- 비동기 통신 axios -->
+  <script type="text/javascript" src="https://unpkg.com/axios@0.26.0/dist/axios.min.js"></script>
+  <script src="/CodeArena/js/codeArenaList.js"></script>
+  <script src="/CodeArena/js/popArenaChatRoom.js"></script>
+  <script src="/CodeArena/js/fillter.js"></script>
+
+ 
+ 
+
+
+
+
+</body>
+
+</html>
