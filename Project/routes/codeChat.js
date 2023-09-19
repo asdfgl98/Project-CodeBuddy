@@ -15,7 +15,6 @@ router.get('/createRoom',(req,res)=>{
 router.post('/enterRoom',(req,res)=>{
     let checkEnd = req.session.userName
     let roomNum = req.body.roomNum
-    console.log('실행되나?', roomNum)
     let sql = 'UPDATE TB_CHATROOM SET USER_COUNT = USER_COUNT+1 WHERE ROOM_NUMBER=?;'
     let conutSql = 'SELECT * FROM TB_CHATROOM;'
     conn.connect()
@@ -88,8 +87,6 @@ router.post('/updateroom',(req,res)=>{
     let lang = roomInfo.dev_lang
     let host = roomInfo.createdBy
     let count = roomInfo.userCount
-    console.log('개빡치네',roomInfo)
-    console.log('뭐가안오나',number,name, method,lang,host,count)
 
     let sql = 'INSERT INTO TB_CHATROOM (ROOM_NUMBER, ROOM_METHOD, ROOM_NAME, ROOM_LANG, ROOM_HOST, USER_COUNT) VALUES(?,?,?,?,?,?);'
     let findRoom = 'SELECT * FROM TB_CHATROOM WHERE ROOM_NUMBER =?;'
@@ -112,7 +109,6 @@ router.get('/arenaList',(req,res)=>{
 
     conn.connect()
     conn.query(sql,(err,result)=>{
-        // console.log('이거도보자',result)
         res.json(JSON.stringify(result))
     })
 })
@@ -157,7 +153,7 @@ router.post('/disconnectUser',(req,res)=>{
         else{
             conn.query(sql2,(err,result)=>{
                 if(err){
-                    console.log('에바지')
+                    console.log('쿼리문 에러')
                 }
                 else{
                     res.json(JSON.stringify(result))
@@ -199,7 +195,6 @@ router.post('/userSocket',(req,res)=>{
 })
 
 router.post("/userFull", (req, res) => {
-    console.log("룸넘버 : ", req.body.roomNumber);
     let roomNum = req.body.roomNumber
     let sql = "SELECT USER_COUNT FROM TB_CHATROOM WHERE ROOM_NUMBER = ?"
     conn.connect()
@@ -208,7 +203,6 @@ router.post("/userFull", (req, res) => {
         console.log("유저 카운트 쿼리문 에러");
       }
       else{
-        console.log("가져와지나아아앙", result);
         res.json(JSON.stringify(result[0]))
       }
     })

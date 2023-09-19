@@ -284,17 +284,18 @@ ChatNamespace.on("connection", (socket) => {
 
   });
 
+  // 코드 전송 클릭 감지 후, 해당 방에 접속해있는 인원에게 방번호 값 전송
+  socket.on("sendClick", () => {
+    ChatNamespace.to(socket.room_number).emit("socketUser", {
+      roomNum: socket.room_number,
+    });
+  });
+
   // 코드 에디터 코드전송
   socket.on("codeSendBtn", (data) => {
     socket.to(data.socketId).emit("codeSend", data);
   });
 
-  socket.on("sendClick", () => {
-    let room_num = socket.room_number;
-    ChatNamespace.to(socket.room_number).emit("socketUser", {
-      roomNum: socket.room_number,
-    });
-  });
 
 });
 
@@ -410,7 +411,7 @@ ArenaNamespace.on("connection", (socket) => {
     }
   );
 
-  // 아레나
+  // 아레나 채팅 메세지 수신
   socket.on("new_message", ({ currentNickname, message: message }) => {
     let roomNum = socket.room_number;
     socket.emit("my_message", { currentNickname, message: message });
@@ -419,7 +420,6 @@ ArenaNamespace.on("connection", (socket) => {
       .to(roomNum)
       .emit("other_message", { currentNickname, message: message });
 
-    // 방 이름 정보를 가져와서 해결해야함
   });
 
   socket.on("click_start_btn", () => {

@@ -16,7 +16,6 @@ router.get("/createRoom", (req, res) => {
 router.post("/enterRoom", (req, res) => {
   let checkEnd = req.session.userName;
   let roomNum = req.body.roomNum;
-  console.log("실행되나?", roomNum);
   let sql =
     "UPDATE TB_ARENAROOM SET USER_COUNT = USER_COUNT+1 WHERE ROOM_NUMBER=?;";
   let conutSql = "SELECT * FROM TB_ARENAROOM;";
@@ -105,7 +104,6 @@ router.get("/arenaList", (req, res) => {
 
   conn.connect();
   conn.query(sql, (err, result) => {
-    // console.log('이거도보자',result)
     res.json(JSON.stringify(result));
   });
 });
@@ -114,7 +112,6 @@ router.get("/arenaList", (req, res) => {
 router.post("/connectUser", (req, res) => {
   let userName = req.session.userName;
   let roomNum = req.body.roomNum;
-  console.log(roomNum);
   let sql = "INSERT INTO ARENA_USER (ROOM_NUMBER, CONN_USER) VALUES(?,?);";
   let sql2 = "SELECT * FROM ARENA_USER;";
   conn.connect();
@@ -136,7 +133,6 @@ router.post("/connectUser", (req, res) => {
 router.post("/readyCount", (req, res) => {
   let roomNum = req.body.roomNum;
   let isReady = "Y";
-  console.log("readyCount의 방 번호", roomNum);
   let sql =
     "SELECT COUNT(*) AS COUNT FROM ARENA_USER WHERE ROOM_NUMBER = ? AND USER_READY = ?";
   conn.connect();
@@ -163,7 +159,6 @@ router.post("/disconnectUser", (req, res) => {
     } else {
       conn.query(sql2, (err, result) => {
         if (err) {
-          console.log("에바지");
         } else {
           res.json(JSON.stringify(result));
         }
@@ -189,8 +184,6 @@ router.post("/codeReady", (req, res) => {
   let data = req.body.data;
   let roomNum = data.roomNum;
   let nickName = data.nickName;
-  console.log("코드레디", roomNum, nickName);
-  console.log("/codeReady의 data", data);
   let sql = "SELECT * FROM ARENA_USER WHERE ROOM_NUMBER = ? AND CONN_USER = ?";
   let sqlY =
     "UPDATE ARENA_USER SET USER_READY = 'Y' WHERE ROOM_NUMBER = ? AND CONN_USER = ?";
@@ -202,7 +195,6 @@ router.post("/codeReady", (req, res) => {
     if (err) {
       console.log("READY SELECT 에러");
     } else {
-      console.log("ready : ", result);
       if (result[0].USER_READY == "N") {
         conn.query(sqlY, [roomNum, nickName], (err, result) => {
           if (err) {
@@ -214,7 +206,6 @@ router.post("/codeReady", (req, res) => {
                 console.log("ready 변경 후 select 에러");
               } else {
                 res.json(JSON.stringify(result));
-                console.log("11111111111111", result);
               }
             });
           }
@@ -230,7 +221,6 @@ router.post("/codeReady", (req, res) => {
                 console.log("ready 변경 후 select 에러");
               } else {
                 res.json(JSON.stringify(result));
-                console.log("222222222222", result);
               }
             });
           }
@@ -242,7 +232,6 @@ router.post("/codeReady", (req, res) => {
 
 // 코드 아레나 방 유저 인원수 제한 하기위해 유저수 가져오기
 router.post("/userFull", (req, res) => {
-  console.log("룸넘버 : ", req.body.roomNumber);
   let roomNum = req.body.roomNumber
   let sql = "SELECT USER_COUNT FROM TB_ARENAROOM WHERE ROOM_NUMBER = ?"
   conn.connect()
@@ -251,7 +240,6 @@ router.post("/userFull", (req, res) => {
       console.log("유저 카운트 쿼리문 에러");
     }
     else{
-      console.log("가져와지나아아앙", result);
       res.json(JSON.stringify(result[0]))
     }
   })
@@ -277,17 +265,14 @@ router.post('/gameStart',(req,res)=>{
 router.post('/testSucess',(req,res)=>{
   let roomNum = req.body.roomNum
   let name = req.body.name
-  console.log(roomNum,name)
   let sql = 'UPDATE ARENA_USER SET USER_READY = "Y" WHERE ROOM_NUMBER=? AND CONN_USER =?;'
   let sql2 = 'SELECT COUNT(*) AS COUNT FROM ARENA_USER WHERE USER_READY = "Y" AND ROOM_NUMBER =?'
   conn.connect()
   conn.query(sql,[roomNum,name],(err,result)=>{
     if(err){
-      console.log('캐리')
     }
     else{
       conn.query(sql2,[roomNum],(err,result)=>{
-        console.log('뭔데이거')
         res.json(JSON.stringify(result[0]))
       })
     }

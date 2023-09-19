@@ -117,7 +117,6 @@ const updateArenaRoom = (roomList) => {
   const $board_table = $board_list.querySelector(".board-table");
   const $tbody = $board_table.querySelector("tbody");
   const $tr = document.querySelectorAll("tr");
-  // $tr.remove();
 
   if (clickEventHandler) {
     $tbody.removeEventListener("click", clickEventHandler);
@@ -337,6 +336,7 @@ const ready = () => {
 // 클릭 이벤트 리스너 등록
 $readyBtn.addEventListener("click", ready);
 
+// DB에 접근하여 Ready 값 변경
 arenaSocket.on("my_ready", (data) => {
   axios.post("/codeArena/codeReady", { data }).then((res) => {
     let data = JSON.parse(res.data);
@@ -376,6 +376,7 @@ arenaSocket.on("ready_on", (data) => {
   });
 });
 
+// Ready 한 인원수 카운트
 let ready_count;
 let currentUsers;
 
@@ -507,7 +508,7 @@ const $form_input = $c_chatting_form.querySelector("#form_input"); // 채팅 작
 const $c_chatting_2 = $c_chatting_form.querySelector(".c_chatting_2");
 const $c_chatting_2_btn = $c_chatting_2.querySelector(".c_chatting_2_btn");
 
-// 공지
+// 입장문구
 const addNotice = (message) => {
   const $div = document.createElement("div");
   $div.id = 'notice'
@@ -516,6 +517,7 @@ const addNotice = (message) => {
   scrollToBottom()
 };
 
+// 메세지 전송 함수
 const handleMessageSubmit = (event) => {
   event.preventDefault();
   const message = $form_input.value; // 메시지 입력값 가져오기
@@ -541,6 +543,7 @@ function scrollToBottom() {
   $c_main_content.scrollTop = $c_main_content.scrollHeight;
 }
 
+// 내 메세지 div 생성
 arenaSocket.on("my_message", ({ currentNickname, message }) => {
   const $div = document.createElement("div");
   const $Div = document.createElement('div')
@@ -552,6 +555,7 @@ arenaSocket.on("my_message", ({ currentNickname, message }) => {
   scrollToBottom()
 });
 
+// 상대방 메세지 div 생성
 arenaSocket.on("other_message", ({ currentNickname, message }) => {
   const $div = document.createElement("div");
   $div.id = "other_message"
@@ -580,8 +584,6 @@ arenaSocket.on("enter_host_user", ({ conn_user, room_host, room_number }) => {
 arenaSocket.on("enter_normal_user", ({ conn_user, room_host, room_number }) => {
   const $c_a_p_user = document.querySelector(".c_a_p_user");
   const $divs = $c_a_p_user.querySelectorAll("div");
-  // $readyBtn.style.display = "block";
-  // $startBtn.style.display = "none";
   $divs.forEach(($div) => {
     $div.remove();
   });
@@ -856,6 +858,8 @@ const outPut = document.querySelector('#live')
         })
     })
 
+  
+// 정답 제출한 사용자 ok 아이콘 활성화
 arenaSocket.on('testSucess',(data)=>{
   let name = data
   let check = document.querySelector(`.${data}`)
@@ -864,6 +868,7 @@ arenaSocket.on('testSucess',(data)=>{
 
 })
 
+// 전체 사용자 모두 정답시 게임 종료
 arenaSocket.on('okRoomNum',(data)=>{
   let data1 = data.roomNum
   axios.post('/codeArena/testSucess',{roomNum:data1, name:currentNickname})

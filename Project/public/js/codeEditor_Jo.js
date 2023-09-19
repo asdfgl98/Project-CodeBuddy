@@ -29,7 +29,7 @@ let html = null;
 let css = null;
 let js = null;
 
-function updateOutput() {
+const updateOutput=()=> {
     const outputHTML = html ? html.getValue() : '';
     const outputCSS = css ? css.getValue() : '';
     const outputJS = js ? js.getValue() : '';
