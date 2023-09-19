@@ -32,8 +32,7 @@ JavaScript 라이브러리인 Socket.io를 활용해 사용자간에 실시간 �
 ## 📌 주요 기능
 
 #### 메인 페이지 - <a href="" >상세보기 - WIKI 이동</a>
-- YouTube API 연동
-- 메인 포스터(영화) 이미지 슬라이드(CSS)
+- 
 
 #### 회원가입 - <a href="" >상세보기 - WIKI 이동</a>
 - axios로 DB에 있는 ID 중복 체크
@@ -42,7 +41,14 @@ JavaScript 라이브러리인 Socket.io를 활용해 사용자간에 실시간 �
 - DB값 검증
 - 로그인 시 쿠키(Cookie) 및 세션(Session) 생성
 
+#### CodeChat/Arena 공통 기능 - <a href="" >상세보기 - WIKI 이동</a>
+-
 
+#### CodeChat - <a href="" >상세보기 - WIKI 이동</a>
+-
+
+#### CodeArena - <a href="" >상세보기 - WIKI 이동</a>
+-
 
 
 
