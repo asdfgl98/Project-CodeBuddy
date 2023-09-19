@@ -35,8 +35,6 @@
 
 ## 📌 주요 기능
 
-<br/>
-
 #### 메인 페이지 - <a href="https://github.com/asdfgl98/Project-CodeBuddy/wiki/1.-Main-Page" >자세히보기(WIKI)</a>
 - Session 값 유무에 따른 서비스 이용 제한 및 Login 탭 정보 변경
 
