@@ -35,26 +35,26 @@
 
 ## 📌 주요 기능
 
-#### 메인 페이지 - <a href="https://github.com/asdfgl98/Project-CodeBuddy/wiki/1.-Main-Page" >자세히보기(WIKI)</a>
+#### 메인 페이지 - <a href="https://github.com/asdfgl98/Project-CodeBuddy/wiki/1.-Main-Page" target="_blank">자세히보기(WIKI)</a>
 - Session 값 유무에 따른 서비스 이용 제한 및 Login 탭 정보 변경
 
-#### 회원가입 - <a href="https://github.com/asdfgl98/Project-CodeBuddy/wiki/2.-Join" >자세히보기(WIKI)</a>
+#### 회원가입 - <a href="https://github.com/asdfgl98/Project-CodeBuddy/wiki/2.-Join" target="_blank">자세히보기(WIKI)</a>
 - axios로 DB에 있는 ID 중복 체크 검증
 
-#### 로그인 - <a href="https://github.com/asdfgl98/Project-CodeBuddy/wiki/3.-Login" >자세히보기(WIKI)</a>
+#### 로그인 - <a href="https://github.com/asdfgl98/Project-CodeBuddy/wiki/3.-Login" target="_blank">자세히보기(WIKI)</a>
 - axios로 DB에 접근하여 ID 및 PW 검증 후 로그인 처리
 - 로그인 시 세션(Session) 생성
 
-#### CodeChat/Arena 공통 기능 - <a href="https://github.com/asdfgl98/Project-CodeBuddy/wiki/4.-Code-Arena,-Code-Chat-%EA%B3%B5%ED%86%B5" >자세히보기(WIKI)</a>
+#### CodeChat/Arena 공통 기능 - <a href="https://github.com/asdfgl98/Project-CodeBuddy/wiki/4.-Code-Arena,-Code-Chat-%EA%B3%B5%ED%86%B5" target="_blank">자세히보기(WIKI)</a>
 - Socket.io의 NameSpace를 사용해 하나의 서버에서 두 가지의 서버로 분리
 - 채팅방 List 실시간으로 최신화/방 생성/방 삭제 적용
 - 사용자간의 실시간 채팅 기능
 
-#### CodeChat - <a href="https://github.com/asdfgl98/Project-CodeBuddy/wiki/5.Code-Chat" >자세히보기(WIKI)</a>
+#### CodeChat - <a href="https://github.com/asdfgl98/Project-CodeBuddy/wiki/5.Code-Chat" target="_blank">자세히보기(WIKI)</a>
 - CodeMirror 라이브러리를 활용하여 웹페이지상 Code Editor 구현
 - Socket.io로 실시간 통신을 통해 사용자간에 작성한 Code 전송 기능 구현
 
-#### CodeArena - <a href="https://github.com/asdfgl98/Project-CodeBuddy/wiki/6.-Code-Arena" >자세히보기(WIKI)</a>
+#### CodeArena - <a href="https://github.com/asdfgl98/Project-CodeBuddy/wiki/6.-Code-Arena" target="_blank">자세히보기(WIKI)</a>
 - 백준, 프로그래머스와 같은 알고리즘 문제 풀이를 게임형식으로 재구성
 - 다른 사용자들과 실시간으로 알고리즘 풀이를 하면서 재미와 공부 두 가지 요소를 결합
 
