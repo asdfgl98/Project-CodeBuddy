@@ -24,8 +24,8 @@
 <br/>
 
 ## ⚙️ 개발 환경
-- `JavaScript`
-- `Node.js(18.16.1)`
+- **FE** : `HTML` `CSS` `JavaScript`
+- **BE**  : `Node.js(18.16.1)`
 - **IDE** : Visual Studio
 - **Framework** : Express.js(4.18.2)
 - **Database** : MySQL(8.0.26)
