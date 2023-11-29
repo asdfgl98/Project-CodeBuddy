@@ -1,4 +1,4 @@
-# TeamProject-CodeBuudy
+# TeamProject-CodeBuddy
 개발 입문자를 위한 실시간 스터디 서비스
 
 
