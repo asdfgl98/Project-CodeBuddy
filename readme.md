@@ -49,7 +49,7 @@
 - axios로 DB에 접근하여 ID 및 PW 검증 후 로그인 처리
 - 로그인 시 세션(Session) 생성
 
-#### CodeChat/Arena 공통 기능 - <a href="https://github.com/asdfgl98/Project-CodeBuddy/wiki/4.-Code-Arena,-Code-Chat-%EA%B3%B5%ED%86%B5" target="_blank">상세보기(</a>
+#### CodeChat/Arena 공통 기능 - <a href="https://github.com/asdfgl98/Project-CodeBuddy/wiki/4.-Code-Arena,-Code-Chat-%EA%B3%B5%ED%86%B5" target="_blank">상세보기</a>
 - Socket.io의 NameSpace를 사용해 하나의 서버에서 두 가지의 서버로 분리
 - 채팅방 List 실시간으로 최신화/방 생성/방 삭제 적용
 - 사용자간의 실시간 채팅 기능
