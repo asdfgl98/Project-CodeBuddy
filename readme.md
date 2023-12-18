@@ -10,6 +10,7 @@
 사용자간에 **실시간으로 코드공유**가 가능하고, 백준, 프로그래머스와 같은 **알고리즘 문제풀이를 게임화** 하여 <br/>
 사용자들끼리 대결하는 방식을 채택해 공부와 재미 요소를 동시에 결합하였습니다.
 
+### 🎥 시연영상
 ![코드버디 시연GIF](https://github.com/asdfgl98/Project-CodeBuddy/assets/83624652/9b5dfa73-168b-4ed0-9306-c15e50b63691)<br/>
 <a href="https://www.youtube.com/watch?v=4jiMqKOPrkU">Youtube에서 영상보기</a>
 
