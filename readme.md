@@ -10,6 +10,8 @@
 사용자간에 **실시간으로 코드공유**가 가능하고, 백준, 프로그래머스와 같은 **알고리즘 문제풀이를 게임화** 하여 <br/>
 사용자들끼리 대결하는 방식을 채택해 공부와 재미 요소를 동시에 결합하였습니다.
 
+[![Video Label](http://img.youtube.com/vi/4jiMqKOPrkU/0.jpg)](https://youtu.be/4jiMqKOPrkU)
+
 <br/>
 
 ## ⏱️ 프로젝트 기간(기획 ~ 발표준비)
